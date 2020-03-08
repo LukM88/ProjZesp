@@ -1,13 +1,13 @@
-04.03.2020 23:00
+08.03.2020 21:37
 etap 2:
 
 zrobione:
 
 - poprawiona funkcjonalność i specyfikacja funkcjonalności (patrzałek)
 - dopisane repozytorium do narzędzi (xD) (patrzalek)
+- 6 niefunkcjonalności (orelik) [jak ktoś ma jeszcze pomysł to śmiało]
 
 do zrobienia:
 
 - poprawić protokół (mrzygłód)
-- 10 (?) niefunkcjonalności (orelik)
 - użytkownicy i use case diagram (waltoś)
