@@ -74,8 +74,6 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException | JSONException e) {
                     e.printStackTrace();
                     Toast.makeText(getBaseContext(), "błąd pliku", Toast.LENGTH_LONG).show();
-
-
                 }
 
             }

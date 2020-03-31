@@ -2,4 +2,18 @@
     <string name="app_name">Organizer</string>
     <string name="go_btn">Go</string>
     <string name="ent_pwd">Enter password</string>
+    <string-array name="months">
+        <item>January</item>
+        <item>February</item>
+        <item>March</item>
+        <item>April</item>
+        <item>May</item>
+        <item>June</item>
+        <item>July</item>
+        <item>August</item>
+        <item>September</item>
+        <item>October</item>
+        <item>November</item>
+        <item>December</item>
+    </string-array>
 </resources>
