@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Organizer</string>
     <string name="go_btn">Go</string>
-
+    <string name="ent_pwd">Enter password</string>
 </resources>
