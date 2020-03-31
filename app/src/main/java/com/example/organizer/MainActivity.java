@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
+    DBHelper myDB;
     private Button nextButton;
     private TextView titleText;
 
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         hideNavigationBar();
+        myDB= new DBHelper(this);
 
 
         nextButton = findViewById(R.id.nextButton);
