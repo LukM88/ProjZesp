@@ -62,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         json= json + line;
                     }
 
-                    JSONArray jasonArray = new JSONArray(json);
-                    JSONObject jasonObject = jasonArray.getJSONObject(0);
+                    JSONObject jasonObject = new JSONObject(json);
                     pwd = jasonObject.getString("password");
                     if(password.getText().toString().equals(pwd)) {
                         Intent intent = new Intent(getBaseContext(), CalendarActivity.class);
