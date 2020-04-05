@@ -1,7 +1,23 @@
 <resources>
     <string name="app_name">Organizer</string>
-    <string name="go_btn">Go</string>
-    <string name="ent_pwd">Enter password</string>
+
+    <!-- Login Activity -->
+    <string name="login_text">Login:</string>
+    <string name="password_text">Password:</string>
+    <string name="code_text">Input code:</string>
+
+    <string name="forgot_btn">Forgot Password?</string>
+    <string name="login_btn">Log In</string>
+    <string name="no_account"><u>Don\'t have an account? Register here!</u></string>
+
+
+    <!-- Register Activity -->
+
+    <string name="confirm_password_text">Confirm password:</string>
+    <string name="password_hint">Hint:</string>
+    <string name="register_btn">Register</string>
+    <string name="already_account"><u>Already have an account? Login here!</u></string>
+
     <string-array name="months">
         <item>January</item>
         <item>February</item>
