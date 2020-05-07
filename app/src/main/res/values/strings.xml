@@ -17,6 +17,9 @@
     <string name="password_hint">Hint:</string>
     <string name="register_btn">Register</string>
     <string name="already_account"><u>Already have an account? Login here!</u></string>
+    <string name="todo">TODO</string>
+    <string name="wyloguj">Log Out</string>
+    <string name="Calender">Calender</string>
 
     <string-array name="months">
         <item>January</item>
