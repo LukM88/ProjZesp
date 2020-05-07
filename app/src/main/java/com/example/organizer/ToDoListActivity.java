@@ -33,7 +33,7 @@ public class ToDoListActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 //TODO
-                Intent intent = new Intent(getBaseContext(), CalendarView.class);
+                Intent intent = new Intent(getBaseContext(), CalendarActivity.class);
 
                 startActivity(intent);
                 finish();
