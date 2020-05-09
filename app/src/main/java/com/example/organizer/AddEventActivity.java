@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddEventActivity extends MainActivity {
     private Button backBtn;
@@ -30,6 +31,9 @@ public class AddEventActivity extends MainActivity {
         setContentView(R.layout.activity_add_event);
         hideNavigationBar();
         Intent intent = getIntent();
+        String selectedDay = intent.getStringExtra("day");
+        String selectedMonth = intent.getStringExtra("month");
+        String selectedYear = intent.getStringExtra("year");
         backBtn=findViewById(R.id.cancelButton);
         addBtn=findViewById(R.id.addEventButton);
         nameText=findViewById(R.id.eventNameText);
@@ -41,6 +45,8 @@ public class AddEventActivity extends MainActivity {
         MM=findViewById(R.id.minutesText);
         priority=findViewById(R.id.prioritySpinner);
         notification=findViewById(R.id.notificationSpinner);
+
+
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,19 +61,33 @@ public class AddEventActivity extends MainActivity {
             public void onClick(View v) {
 
                     //TODO napisanie dodawania eventu do bazy przemyśleć wywalenie spinerów na dizeń
-               // DatabaseHelper dbHelper = new DatabaseHelper(getBaseContext());
+               DatabaseHelper dbHelper = new DatabaseHelper(getBaseContext());
+                if(!nameText.getText().toString().isEmpty()) {
+                   if(!selectedYear.isEmpty()|| !selectedMonth.isEmpty() || !selectedDay.isEmpty()){
+                       try {
+                           dbHelper.addEvent(nameText.getText().toString(), descriptionText.getText().toString(), HH.getText().toString(), MM.getText().toString(), " ", false, day.toString(), month.toString(), year.toString(), MainActivity.login);
+                       }catch (Exception e){
+                           Toast.makeText(getBaseContext(),"Invalid data type!!",Toast.LENGTH_LONG).show();
+                           e.printStackTrace();
+                       }finally {
+                           dbHelper.close();
+                       }
+                       }else {
+                       Toast.makeText(getBaseContext(),"Event have to have date",Toast.LENGTH_LONG).show();
+                   }
 
-               // dbHelper.addEvent(this.)
-
+                }else{
+                    Toast.makeText(getBaseContext(),"Event have to have name!!",Toast.LENGTH_LONG).show();
+                }
+                Toast.makeText(getBaseContext(),"Event added",Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(getBaseContext(), CalendarActivity.class);
                 startActivity(intent);
+
                 finish();
             }
         });
 
-        String selectedDay = intent.getStringExtra("day");
-        String selectedMonth = intent.getStringExtra("month");
-        String selectedYear = intent.getStringExtra("year");
+
     }
 
     @Override

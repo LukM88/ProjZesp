@@ -28,12 +28,9 @@ public class CustomAdapter extends BaseAdapter {
         this.context = context;
         inflter = (LayoutInflater.from(context));
         dbHelper = new DatabaseHelper(context);
-        //TODO usunąć wymuszane dodawanie eventów
-        //dbHelper.addEvent("Event","Event na podstawie klasy ToDo","00","00","fuck",false,"01","05","2020");
-        //dbHelper.addEvent("Event2","Event2 na podstawie klasy ToDo","00","00","fuck",false,"01","05","2020");
-        //dbHelper.addEvent("Event3","Event3 na podstawie klasy ToDo","00","00","fuck",false,"01","05","2020");
 
         names=dbHelper.getEvents();
+        dbHelper.close();
     }
 
     @Override
@@ -56,21 +53,33 @@ public class CustomAdapter extends BaseAdapter {
         view = inflter.inflate(R.layout.list_item, null);
         final CheckedTextView simpleCheckedTextView = view.findViewById(R.id.simpleCheckedTextView);
         simpleCheckedTextView.setText(names.get(position).getName());
+        if (names.get(position).getState()) {
+            simpleCheckedTextView.setChecked(true);
+            simpleCheckedTextView.setCheckMarkDrawable(R.drawable.check);
+        } else {
+            simpleCheckedTextView.setChecked(false);
+        }
+
 // perform on Click Event Listener on CheckedTextView
         simpleCheckedTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dbHelper= new DatabaseHelper(context);
+                dbHelper.chceck(names.get(position));
                 if (simpleCheckedTextView.isChecked()) {
 // set cheek mark drawable and set checked property to false
                     value = "un-Checked";
+                    names.get(position).setState(false);
                     simpleCheckedTextView.setCheckMarkDrawable(null);
                     simpleCheckedTextView.setChecked(false);
                 } else {
 // set cheek mark drawable and set checked property to true
+                    names.get(position).setState(true);
                     value = "Checked";
                     simpleCheckedTextView.setCheckMarkDrawable(R.drawable.check);
                     simpleCheckedTextView.setChecked(true);
                 }
+                dbHelper.close();
                 Toast.makeText(context, value, Toast.LENGTH_SHORT).show();
             }
         });

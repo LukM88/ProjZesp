@@ -30,7 +30,7 @@ import java.io.InputStreamReader;
 import java.net.PasswordAuthentication;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static String login;
     private TextView titleText;
     private TextView loginText;
     private TextView passwordText;
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String login = loginInput.getText().toString();
+                login = loginInput.getText().toString();
                 String password = passwordInput.getText().toString();
                 boolean res = dbHelper.doesUserExist(login,password);
                 if(res)

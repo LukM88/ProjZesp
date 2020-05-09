@@ -5,6 +5,7 @@ import android.provider.ContactsContract;
 import java.util.Date;
 
 public class ToDo {
+    private String ID;
     private String name;
     private String description;
     private String HH;
@@ -13,6 +14,7 @@ public class ToDo {
     private String day;
     private String month;
     private String year;
+    private String owner;
     private boolean state;
     ToDo(Date date){
         this.name="ToDo";
@@ -96,6 +98,22 @@ public class ToDo {
 
     public String getTime(){
         return getHH()+":"+getMM();
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getID() {
+        return this.ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }
 

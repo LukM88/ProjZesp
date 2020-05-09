@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TAB2COL_8 = "day";
     public static final String TAB2COL_9 = "month";
     public static final String TAB2COL_10 = "year";
-
+    public static final String TAB2COL_11 = "owner";
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 2);
     }
@@ -37,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE users (ID INTEGER PRIMARY KEY AUTOINCREMENT, login TEXT, password TEXT, hint TEXT)");
-        db.execSQL("CREATE TABLE "+TABLE2+" ("+TAB2COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+TAB2COL_2+" TEXT, "+TAB2COL_3+" TEXT, "+TAB2COL_4+" TEXT, "+TAB2COL_5+" TEXT, "+TAB2COL_6+" TEXT, "+TAB2COL_7+" BOOLEAN, "+TAB2COL_8+" TEXT, "+TAB2COL_9+" TEXT, "+TAB2COL_10+" TEXT)");
+        db.execSQL("CREATE TABLE "+TABLE2+" ("+TAB2COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+TAB2COL_2+" TEXT, "+TAB2COL_3+" TEXT, "+TAB2COL_4+" TEXT, "+TAB2COL_5+" TEXT, "+TAB2COL_6+" TEXT, "+TAB2COL_7+" BOOLEAN, "+TAB2COL_8+" TEXT, "+TAB2COL_9+" TEXT, "+TAB2COL_10+" TEXT, "+TAB2COL_11+" TEXT)");
     }
 
     @Override
@@ -83,9 +84,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public long addEvent(String name, String description, String HH,String MM,String priority,boolean state,String day,String month,String year){
+    public long addEvent(String name, String description, String HH,String MM,String priority,boolean state,String day,String month,String year,String owner){
         SQLiteDatabase sqlDB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+
         contentValues.put(TAB2COL_2, name);
         contentValues.put(TAB2COL_3, description);
         contentValues.put(TAB2COL_4, HH);
@@ -95,7 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(TAB2COL_8, day);
         contentValues.put(TAB2COL_9, month);
         contentValues.put(TAB2COL_10, year);
-
+        contentValues.put(TAB2COL_11, owner);
 
         long res = sqlDB.insert(TABLE2, null, contentValues);
         sqlDB.close();
@@ -108,6 +110,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         res.moveToFirst();
         int i=0;
         while(res.isAfterLast() == false) {
+            todo.setID(res.getString(res.getColumnIndex("ID")));
             todo.setName(res.getString(res.getColumnIndex("name")));
             todo.setDescription(res.getString(res.getColumnIndex("descriptions")));
             todo.setHH(res.getString(res.getColumnIndex("HH")));
@@ -116,9 +119,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             todo.setDay(res.getString(res.getColumnIndex("day")));
             todo.setMonth(res.getString(res.getColumnIndex("month")));
             todo.setYear(res.getString(res.getColumnIndex("year")));
+            todo.setOwner(res.getString(res.getColumnIndex("owner")));
             res.moveToNext();
             i++;
         }
+        sqlDB.close();
         return todo;
     }
     public ArrayList<ToDo> getEvents(){
@@ -130,6 +135,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int i=0;
         while(res.isAfterLast() == false) {
             array_list2.add(new ToDo());
+            array_list2.get(i).setID(res.getString(res.getColumnIndex("ID")));
             array_list2.get(i).setName(res.getString(res.getColumnIndex("name")));
             array_list2.get(i).setDescription(res.getString(res.getColumnIndex("descriptions")));
             array_list2.get(i).setHH(res.getString(res.getColumnIndex("HH")));
@@ -139,9 +145,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             array_list2.get(i).setDay(res.getString(res.getColumnIndex("day")));
             array_list2.get(i).setMonth(res.getString(res.getColumnIndex("month")));
             array_list2.get(i).setYear(res.getString(res.getColumnIndex("year")));
+            array_list2.get(i).setOwner(res.getString(res.getColumnIndex("owner")));
             res.moveToNext();
             i++;
         }
+        sqlDB.close();
         return array_list2;
+    }
+
+    public void chceck(ToDo toDo) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(TAB2COL_7,!toDo.getState());
+        long res = db. update(TABLE2,cv,"'"+TAB2COL_1+"'="+Integer.parseInt(toDo.getID()),null);
+        db.close();
     }
 }

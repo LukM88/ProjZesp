@@ -26,6 +26,7 @@ public class ToDoListActivity extends MainActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
         calenderBtn = findViewById(R.id.calenderBtn);
