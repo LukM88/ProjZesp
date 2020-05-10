@@ -20,7 +20,8 @@ public class CalendarActivity extends MainActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         hideNavigationBar();
-
+        DatabaseHelper db = new DatabaseHelper(getBaseContext());
+        db.showEvents();
         calendar = findViewById(R.id.calendar);
         todoBtn = findViewById(R.id.todoBtn);
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {

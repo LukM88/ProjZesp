@@ -15,7 +15,7 @@ public class ToDo {
     private String month;
     private String year;
     private String owner;
-    private boolean state;
+    private Boolean state;
     ToDo(Date date){
         this.name="ToDo";
         this.description="description";
@@ -88,11 +88,11 @@ public class ToDo {
         this.year = year;
     }
 
-    public boolean getState() {
+    public Boolean getState() {
         return state;
     }
 
-    public void setState(boolean state) {
+    public void setState(Boolean state) {
         this.state = state;
     }
 
