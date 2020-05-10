@@ -65,7 +65,7 @@ public class AddEventActivity extends MainActivity {
                 if(!nameText.getText().toString().isEmpty()) {
                    if(!selectedYear.isEmpty()|| !selectedMonth.isEmpty() || !selectedDay.isEmpty()){
                        try {
-                           dbHelper.addEvent(nameText.getText().toString(), descriptionText.getText().toString(), HH.getText().toString(), MM.getText().toString(), " ", false, day.toString(), month.toString(), year.toString(), MainActivity.login);
+                           dbHelper.addEvent(nameText.getText().toString(), descriptionText.getText().toString(), HH.getText().toString(), MM.getText().toString(), "low", false, selectedDay, selectedMonth, selectedYear, MainActivity.login);
                        }catch (Exception e){
                            Toast.makeText(getBaseContext(),"Invalid data type!!",Toast.LENGTH_LONG).show();
                            e.printStackTrace();

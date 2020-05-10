@@ -31,8 +31,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TAB2COL_9 = "month";
     public static final String TAB2COL_10 = "year";
     public static final String TAB2COL_11 = "owner";
+    public static final String[] kolumny = {TAB2COL_1,TAB2COL_2,TAB2COL_3,TAB2COL_4,TAB2COL_5,TAB2COL_6,TAB2COL_7,TAB2COL_8,TAB2COL_9,TAB2COL_10,TAB2COL_11};
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, 2);
+        super(context, DATABASE_NAME, null, 3);
     }
 
     @Override
@@ -108,7 +109,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ToDo todo=new ToDo();
         Cursor res = sqlDB.rawQuery( "select * from "+TABLE2+" WHERE "+TAB2COL_1+"="+id, null );
         res.moveToFirst();
-        int i=0;
+
         while(res.isAfterLast() == false) {
             todo.setID(res.getString(res.getColumnIndex("ID")));
             todo.setName(res.getString(res.getColumnIndex("name")));
@@ -121,13 +122,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             todo.setYear(res.getString(res.getColumnIndex("year")));
             todo.setOwner(res.getString(res.getColumnIndex("owner")));
             res.moveToNext();
-            i++;
+
         }
         sqlDB.close();
         return todo;
     }
     public ArrayList<ToDo> getEvents(){
         SQLiteDatabase sqlDB = this.getReadableDatabase();
+
         ArrayList<String> array_list = new ArrayList<String>();
         ArrayList<ToDo> array_list2 = new ArrayList<ToDo>();
         Cursor res = sqlDB.rawQuery( "select * from "+TABLE2, null );
@@ -149,15 +151,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             res.moveToNext();
             i++;
         }
+
         sqlDB.close();
         return array_list2;
     }
 
     public void chceck(ToDo toDo) {
         SQLiteDatabase db = this.getWritableDatabase();
+
+        showEvents();
         ContentValues cv = new ContentValues();
         cv.put(TAB2COL_7,!toDo.getState());
-        long res = db. update(TABLE2,cv,"'"+TAB2COL_1+"'="+Integer.parseInt(toDo.getID()),null);
+        long res = db. update(TABLE2,cv,TAB2COL_1+"="+toDo.getID(),null);
+        showEvents();
         db.close();
+    }
+
+    public void showEvents(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor kursor = db.query(TABLE2,kolumny,null,null,null,null,null);
+        kursor.moveToFirst();
+        while(kursor.isAfterLast() == false) {
+            for(int i = 0 ;i<kolumny.length;i++){
+                System.out.print(kursor.getString(kursor.getColumnIndex(kolumny[i]))+"\n");
+            }
+
+            kursor.moveToNext();
+        }
+
     }
 }

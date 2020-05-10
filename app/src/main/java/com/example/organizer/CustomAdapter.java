@@ -6,15 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckedTextView;
-import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 
-import com.example.organizer.R;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class CustomAdapter extends BaseAdapter {
     ArrayList<ToDo> names=new ArrayList<ToDo>();
@@ -28,7 +24,7 @@ public class CustomAdapter extends BaseAdapter {
         this.context = context;
         inflter = (LayoutInflater.from(context));
         dbHelper = new DatabaseHelper(context);
-
+        dbHelper.showEvents();
         names=dbHelper.getEvents();
         dbHelper.close();
     }
@@ -65,21 +61,26 @@ public class CustomAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 dbHelper= new DatabaseHelper(context);
-                dbHelper.chceck(names.get(position));
-                if (simpleCheckedTextView.isChecked()) {
+
+                if (names.get(position).getState()) {
 // set cheek mark drawable and set checked property to false
                     value = "un-Checked";
+                    dbHelper.chceck(names.get(position));
                     names.get(position).setState(false);
                     simpleCheckedTextView.setCheckMarkDrawable(null);
                     simpleCheckedTextView.setChecked(false);
                 } else {
+                    dbHelper.chceck(names.get(position));
 // set cheek mark drawable and set checked property to true
-                    names.get(position).setState(true);
+
                     value = "Checked";
                     simpleCheckedTextView.setCheckMarkDrawable(R.drawable.check);
                     simpleCheckedTextView.setChecked(true);
+                    names.get(position).setState(true);
                 }
+                //names.set(position,dbHelper.getEvent(Integer.parseInt(names.get(position).getID())));
                 dbHelper.close();
+
                 Toast.makeText(context, value, Toast.LENGTH_SHORT).show();
             }
         });

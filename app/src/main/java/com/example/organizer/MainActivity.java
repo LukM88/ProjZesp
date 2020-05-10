@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
                     {
                         Toast.makeText(getBaseContext(), "Login success!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getBaseContext(), CalendarActivity.class);
+
                         startActivity(intent);
                         finish();
                     }
