@@ -143,7 +143,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             array_list2.get(i).setHH(res.getString(res.getColumnIndex("HH")));
             array_list2.get(i).setMM(res.getString(res.getColumnIndex("MM")));
             array_list2.get(i).setPriority(res.getString(res.getColumnIndex("priority")));
-            array_list2.get(i).setState(Boolean.parseBoolean(res.getString(res.getColumnIndex("state"))));
+            if(res.getInt(res.getColumnIndex("state")) == 1 )
+            {
+                array_list2.get(i).setState(true);
+            }
+            else {
+                array_list2.get(i).setState(false);
+            }
             array_list2.get(i).setDay(res.getString(res.getColumnIndex("day")));
             array_list2.get(i).setMonth(res.getString(res.getColumnIndex("month")));
             array_list2.get(i).setYear(res.getString(res.getColumnIndex("year")));
@@ -162,7 +168,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         showEvents();
         ContentValues cv = new ContentValues();
         cv.put(TAB2COL_7,!toDo.getState());
-        long res = db. update(TABLE2,cv,TAB2COL_1+"="+toDo.getID(),null);
+        long res = db.update(TABLE2,cv,TAB2COL_1+"="+toDo.getID(),null);
         showEvents();
         db.close();
     }
