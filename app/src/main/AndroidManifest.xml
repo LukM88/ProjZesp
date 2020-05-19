@@ -13,6 +13,7 @@
         <activity android:name=".ToDoListActivity" />
         <activity android:name=".AddEventActivity" />
         <activity android:name=".CalendarActivity" />
+        <activity android:name=".PlanForDay"/>
         <activity android:name=".MainActivity">
 
 

@@ -34,13 +34,14 @@ public class CalendarActivity extends MainActivity  {
                 date.setYear(String.valueOf(year));
                 String selectedDate = date.getDate();
 
-                Intent intent = new Intent(getBaseContext(), AddEventActivity.class);
+                Intent intent = new Intent(getBaseContext(), PlanForDay.class);
                 intent.putExtra("day", date.getDay());
                 intent.putExtra("month", date.getMonth());
                 intent.putExtra("year", date.getYear());
                 startActivity(intent);
 
                 Toast.makeText(getBaseContext(), selectedDate, Toast.LENGTH_LONG).show();
+                finish();
             }
         });
         todoBtn.setOnClickListener(new View.OnClickListener() {

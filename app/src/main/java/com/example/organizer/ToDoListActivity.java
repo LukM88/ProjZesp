@@ -40,6 +40,7 @@ public class ToDoListActivity extends MainActivity {
                 Intent intent = new Intent(getBaseContext(), CalendarActivity.class);
 
                 startActivity(intent);
+                finish();
             }
         });
         addButt = findViewById(R.id.floatingActionButton);

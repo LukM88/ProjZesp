@@ -231,4 +231,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqlDB.close();
         return array_list2;
     }
+    public ArrayList<ToDo> getToDoes(MyDate date){
+        SQLiteDatabase sqlDB = this.getReadableDatabase();
+
+        ArrayList<String> array_list = new ArrayList<String>();
+        ArrayList<ToDo> array_list2 = new ArrayList<ToDo>();
+
+        String day = date.getDay();
+        String month = date.getMonth();
+        String year =  date.getYear();
+
+
+        Cursor res = sqlDB.rawQuery( "select * from "+TABLE2+" where day='"+day+"' AND year='"+year+"' AND month='"+month+"'", null );
+        res.moveToFirst();
+        int i=0;
+        while(res.isAfterLast() == false) {
+            array_list2.add(new ToDo());
+            array_list2.get(i).setID(res.getString(res.getColumnIndex("ID")));
+            array_list2.get(i).setName(res.getString(res.getColumnIndex("name")));
+            array_list2.get(i).setDescription(res.getString(res.getColumnIndex("descriptions")));
+            array_list2.get(i).setHH(res.getString(res.getColumnIndex("HH")));
+            array_list2.get(i).setMM(res.getString(res.getColumnIndex("MM")));
+            array_list2.get(i).setPriority(res.getString(res.getColumnIndex("priority")));
+            if(res.getInt(res.getColumnIndex("state")) == 1 )
+            {
+                array_list2.get(i).setState(true);
+            }
+            else {
+                array_list2.get(i).setState(false);
+            }
+            array_list2.get(i).setDay(res.getString(res.getColumnIndex("day")));
+            array_list2.get(i).setMonth(res.getString(res.getColumnIndex("month")));
+            array_list2.get(i).setYear(res.getString(res.getColumnIndex("year")));
+            array_list2.get(i).setOwner(res.getString(res.getColumnIndex("owner")));
+            res.moveToNext();
+
+            i++;
+        }
+
+        sqlDB.close();
+        return array_list2;
+    }
 }
