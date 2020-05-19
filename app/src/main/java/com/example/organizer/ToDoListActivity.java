@@ -7,10 +7,13 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ListView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class ToDoListActivity extends MainActivity {
     private ListView lista;
     private Button logOut;
     private Button calenderBtn;
+    private FloatingActionButton addButt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +36,25 @@ public class ToDoListActivity extends MainActivity {
         calenderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+
                 Intent intent = new Intent(getBaseContext(), CalendarActivity.class);
 
                 startActivity(intent);
             }
         });
-
+        addButt = findViewById(R.id.floatingActionButton);
+        addButt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyDate date=new MyDate();
+                Intent intent = new Intent(getBaseContext(),AddEventActivity.class);
+                intent.putExtra("day",date.getDay());
+                intent.putExtra("month",date.getMonth());
+                intent.putExtra("year",date.getYear());
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override

@@ -27,15 +27,17 @@ public class CalendarActivity extends MainActivity  {
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                String selectedDate = (dayOfMonth) + "-" + (month + 1) + "-" + (year);
-                String selectedDay = String.valueOf(dayOfMonth);
-                String selectedMonth = String.valueOf(month + 1);
-                String selectedYear = String.valueOf(year);
+
+                MyDate date = new MyDate();
+                date.setDay(String.valueOf(dayOfMonth));
+                date.setMonth( String.valueOf(month + 1));
+                date.setYear(String.valueOf(year));
+                String selectedDate = date.getDate();
 
                 Intent intent = new Intent(getBaseContext(), AddEventActivity.class);
-                intent.putExtra("day", selectedDay);
-                intent.putExtra("month", selectedMonth);
-                intent.putExtra("year", selectedYear);
+                intent.putExtra("day", date.getDay());
+                intent.putExtra("month", date.getMonth());
+                intent.putExtra("year", date.getYear());
                 startActivity(intent);
 
                 Toast.makeText(getBaseContext(), selectedDate, Toast.LENGTH_LONG).show();
