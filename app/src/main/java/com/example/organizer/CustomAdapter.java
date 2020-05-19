@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CustomAdapter extends BaseAdapter {
     ArrayList<ToDo> names=new ArrayList<ToDo>();
@@ -24,8 +25,8 @@ public class CustomAdapter extends BaseAdapter {
         this.context = context;
         inflter = (LayoutInflater.from(context));
         dbHelper = new DatabaseHelper(context);
-        dbHelper.showEvents();
-        names=dbHelper.getEvents();
+        //dbHelper.showEvents();
+        names=dbHelper.getToDoes();
         dbHelper.close();
     }
 
@@ -48,6 +49,7 @@ public class CustomAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         view = inflter.inflate(R.layout.list_item, null);
         final CheckedTextView simpleCheckedTextView = view.findViewById(R.id.simpleCheckedTextView);
+
         simpleCheckedTextView.setText(names.get(position).getName());
         if (names.get(position).getState()) {
             simpleCheckedTextView.setChecked(true);

@@ -21,7 +21,7 @@ public class CalendarActivity extends MainActivity  {
         setContentView(R.layout.activity_calendar);
         hideNavigationBar();
         DatabaseHelper db = new DatabaseHelper(getBaseContext());
-        db.showEvents();
+        //db.showEvents();
         calendar = findViewById(R.id.calendar);
         todoBtn = findViewById(R.id.todoBtn);
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {

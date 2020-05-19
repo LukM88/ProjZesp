@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                
                 login = loginInput.getText().toString();
                 String password = passwordInput.getText().toString();
                 boolean res = dbHelper.doesUserExist(login,password);
