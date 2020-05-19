@@ -30,14 +30,6 @@ public class CustomAdapter extends BaseAdapter {
         names=dbHelper.getToDoes();
         dbHelper.close();
     }
-    public CustomAdapter(Context context,MyDate date) {
-        this.context = context;
-        inflter = (LayoutInflater.from(context));
-        dbHelper = new DatabaseHelper(context);
-        //dbHelper.showEvents();
-        names=dbHelper.getToDoes(date);
-        dbHelper.close();
-    }
 
     @Override
     public int getCount() {
@@ -61,7 +53,7 @@ public class CustomAdapter extends BaseAdapter {
         final ImageView imageView = view.findViewById(R.id.imageView2);
         simpleCheckedTextView.setText(names.get(position).getName());
 
-        System.out.println(imageView.isShown());
+        //System.out.println(imageView.isShown());
         if (names.get(position).getState()) {
             simpleCheckedTextView.setChecked(true);
             simpleCheckedTextView.setCheckMarkDrawable(R.drawable.check);

@@ -27,6 +27,7 @@
             android:paddingLeft="15dp"
             android:text="Checked Text View Example"
             android:textColor="#000" />
+
     </LinearLayout>
 
     <!-- CheckedTextView In Android -->

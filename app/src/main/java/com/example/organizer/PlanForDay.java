@@ -14,11 +14,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class PlanForDay extends MainActivity{
     private ListView lista;
     private TextView title;
-    private TextView description;
-    private TextView time;
+    protected TextView description;
+    protected TextView time;
     private FloatingActionButton addButt;
     private Button backButt;
     private MyDate date=new MyDate();
+    private ToDo details;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,12 +27,16 @@ public class PlanForDay extends MainActivity{
         setContentView(R.layout.activity_plan_for_day);
         hideNavigationBar();
         date.setDay(getIntent().getStringExtra("day"));
-        date.setMonth(getIntent().getStringExtra("mont"));
+        date.setMonth(getIntent().getStringExtra("month"));
         date.setYear(getIntent().getStringExtra("year"));
         title=findViewById(R.id.dateText);
         title.setText(date.getDate());
         lista=findViewById(R.id.listForDay);
-        lista.setAdapter(new CustomAdapter(getBaseContext(),date));
+        AdapterForPlan adapter = new AdapterForPlan(getBaseContext(),date);
+
+        lista.setAdapter(adapter);
+
+
         description=findViewById(R.id.textView2);
         time=findViewById(R.id.HHtext);
         backButt=findViewById(R.id.backButton);
