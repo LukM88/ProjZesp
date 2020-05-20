@@ -11,10 +11,12 @@
         android:theme="@style/AppTheme">
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ToDoListActivity" />
-        <activity android:name=".AddEventActivity" />
+        <activity android:name=".AddEventActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity android:name=".CalendarActivity" />
         <activity android:name=".PlanForDay"/>
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize">
 
 
             <intent-filter>

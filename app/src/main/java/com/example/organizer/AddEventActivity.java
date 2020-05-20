@@ -59,7 +59,12 @@ public class AddEventActivity extends MainActivity {
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(HH.getText().equals(null)){
+                    HH.setText("12");
+                }
+                if(MM.getText().equals(null)){
+                    MM.setText("00");
+                }
                     //TODO napisanie dodawania eventu do bazy przemyśleć wywalenie spinerów na dizeń
                DatabaseHelper dbHelper = new DatabaseHelper(getBaseContext());
                 if(!nameText.getText().toString().isEmpty()) {
